@@ -5,7 +5,7 @@ import DataTableSettings from '../../../helpers/DataTableSettings';
 import { Form, Row } from 'react-bootstrap';
 import CommonLoader from "../loader/CommonLoader";
 import {
-   API_LIST_CUSTOMER
+   API_LIST_CUSTOMERS
 }
    from '../../../config/Api';
 import axios from 'axios';
@@ -50,7 +50,7 @@ const ListCustomer = (props) => {
 
       axios({
          method: "GET",
-         url: API_LIST_CUSTOMER,
+         url: API_LIST_CUSTOMERS,
          headers: headers,
       })
          .then((res) => {
@@ -139,35 +139,6 @@ const ListCustomer = (props) => {
       }
 
    ];
-
-   // const handleUpdate = async (user_id, wallet_id, status) => {
-   //    try {
-
-   //       const response = await axios.put(
-   //          `${API_WALLET_STATUS_UPDATE}/${wallet_id}`,
-   //          { status }
-   //       );
-   //       if (response.data.status) {
-   //          Swal.fire({
-   //             position: "top-end",
-   //             icon: "success",
-   //             title: response.data.message,
-   //             showConfirmButton: false,
-   //             timer: 1500,
-   //          });
-   //          fetchWalletData();
-   //       } else {
-   //          toast.error(response.data.message || "Failed to approve wallet", {
-   //             position: toast.POSITION.TOP_CENTER,
-   //             autoClose: 5000,
-   //          });
-   //       }
-   //    } catch (e) {
-   //       const errorMessage = e.response && e.response.data && e.response.data.message
-   //          ? e.response.data.message
-   //          : "An error occurred. Please try again.";
-   //    }
-   // };
 
    const subHeaderComponentMemo = useMemo(() => {
       return (

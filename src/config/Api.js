@@ -7,4 +7,7 @@ export const API_ADMIN_REGISTER = API_DOMAIN + "admin-register";
 export const API_ADMIN_LOGIN = API_DOMAIN + "login";
 
 //Customer
-export const API_LIST_CUSTOMER = API_DOMAIN + "customers";
+export const API_LIST_CUSTOMERS = API_DOMAIN + "customers";
+
+//Driver
+export const API_LIST_DRIVERS = API_DOMAIN + "drivers";

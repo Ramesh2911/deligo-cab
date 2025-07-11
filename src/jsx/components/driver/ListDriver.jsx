@@ -5,19 +5,19 @@ import DataTableSettings from '../../../helpers/DataTableSettings';
 import { Form, Row } from 'react-bootstrap';
 import CommonLoader from "../loader/CommonLoader";
 import {
-   API_LIST_CUSTOMERS
+   API_LIST_DRIVERS
 }
    from '../../../config/Api';
 import axios from 'axios';
 import { Button } from 'rsuite';
 
-const ListCustomer = (props) => {
+const ListDriver = () => {
 
    const token = localStorage.getItem("token");
    const hasFetched = useRef(false);
    useEffect(() => {
       if (!hasFetched.current) {
-         fetchCustomerData();
+         fetchDriverData();
          hasFetched.current = true;
       }
    }, []);
@@ -34,7 +34,7 @@ const ListCustomer = (props) => {
 
    const [filterText, setFilterText] = useState("");
    const [loadingIndicator, setLoadingIndicator] = useState(false);
-   const [customerData, setCustomerData] = useState([]);
+   const [driverData, setDriverData] = useState([]);
    const searchParam = [
       "name",
       "email",
@@ -42,7 +42,7 @@ const ListCustomer = (props) => {
       "is_blocked",
    ];
 
-   const fetchCustomerData = () => {
+   const fetchDriverData = () => {
       const headers = {
          "Content-Type": "application/json",
          "Authorization": `Bearer ${token}`,
@@ -50,13 +50,13 @@ const ListCustomer = (props) => {
 
       axios({
          method: "GET",
-         url: API_LIST_CUSTOMERS,
+         url: API_LIST_DRIVERS,
          headers: headers,
       })
          .then((res) => {
             const result = res?.data?.data;
             const sortedResult = result.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-            setCustomerData(sortedResult);
+            setDriverData(sortedResult);
             setLoadingIndicator(false);
          })
          .catch((e) => {
@@ -160,14 +160,14 @@ const ListCustomer = (props) => {
 
    return (
       <>
-         <PageTitle activeMenu={"Customer List"} motherMenu={"Customer"} />
+         <PageTitle activeMenu={"Driver List"} motherMenu={"Driver"} />
 
          <div className="table-responsive">
 
             <DataTable
-               columns={customerData.length > 0 ? columns : []}
+               columns={driverData.length > 0 ? columns : []}
                data={DataTableSettings.filterItems(
-                  customerData,
+                  driverData,
                   searchParam,
                   filterText
                )}
@@ -193,4 +193,4 @@ const ListCustomer = (props) => {
    );
 };
 
-export default ListCustomer;
+export default ListDriver;
